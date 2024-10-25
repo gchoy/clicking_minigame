@@ -1,0 +1,22 @@
+function init(self)
+	-- Capture the game world dimensions
+	local gameWidth = tonumber(sys.get_config("display.width"))
+	local gameHeight = tonumber(sys.get_config("display.height"))
+	print("gameWidth: " .. tostring(gameWidth) .. "  gameHeight: " .. tostring(gameHeight))
+
+	-- Change background color
+	msg.post("@render:", "clear_color", { color = vmath.vector4(0.2, 0.2, 0.2, 1.0) } )
+
+	-- Create 10 Game Objects
+	for i=1, 10 do
+		self.id = tostring(i)
+		local x1 = math.random(gameWidth)
+		local y1 = math.random(gameHeight)
+		local pos = vmath.vector3(x1, y1, 1)
+		factory.create("#factory", pos, nil, {}, 1)	
+		print("Spawning Coin: " .. self.id .. "  x1: " .. tostring(x1) .. "  y1: " .. tostring(y1))
+	end	
+
+	
+end
+

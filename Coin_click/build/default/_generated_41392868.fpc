@@ -1,0 +1,224 @@
+
+Ë„#version 140
+#ifndef GL_ES
+#define lowp
+#define mediump
+#define highp
+#endif
+
+
+out vec4 _DMENGINE_GENERATED_gl_FragColor_0;
+in lowp vec2 var_texcoord0;
+in lowp vec4 var_face_color;
+in lowp vec4 var_outline_color;
+in lowp vec4 var_shadow_color;
+in lowp vec4 var_sdf_params;
+in lowp vec4 var_layer_mask;
+
+uniform mediump sampler2D texture_sampler;
+
+void main()
+{
+    mediump vec4 df_sample = texture(texture_sampler, var_texcoord0);
+
+    mediump float distance        = df_sample.x;
+    mediump float distance_shadow = df_sample.z;
+
+    lowp float sdf_edge      = var_sdf_params.x;
+    lowp float sdf_outline   = var_sdf_params.y;
+    lowp float sdf_smoothing = var_sdf_params.z;
+    lowp float sdf_shadow    = var_sdf_params.w;
+
+    
+    lowp float sdf_shadow_as_outline = floor(sdf_shadow);
+    
+    lowp float sdf_is_single_layer   = var_layer_mask.a;
+
+    lowp float face_alpha      = smoothstep(sdf_edge - sdf_smoothing, sdf_edge + sdf_smoothing, distance);
+    lowp float outline_alpha   = smoothstep(sdf_outline - sdf_smoothing, sdf_outline + sdf_smoothing, distance);
+    lowp float shadow_alpha    = smoothstep(sdf_shadow - sdf_smoothing, sdf_edge + sdf_smoothing, distance_shadow);
+
+    shadow_alpha = mix(shadow_alpha,outline_alpha,sdf_shadow_as_outline);
+
+    _DMENGINE_GENERATED_gl_FragColor_0 = face_alpha * var_face_color * var_layer_mask.x +
+        outline_alpha * var_outline_color * var_layer_mask.y * (1.0 - face_alpha * sdf_is_single_layer) +
+        shadow_alpha * var_shadow_color * var_layer_mask.z * (1.0 - min(1.0,outline_alpha + face_alpha) * sdf_is_single_layer);
+}
+
+Ë„#version 330
+#ifndef GL_ES
+#define lowp
+#define mediump
+#define highp
+#endif
+
+
+out vec4 _DMENGINE_GENERATED_gl_FragColor_0;
+in lowp vec2 var_texcoord0;
+in lowp vec4 var_face_color;
+in lowp vec4 var_outline_color;
+in lowp vec4 var_shadow_color;
+in lowp vec4 var_sdf_params;
+in lowp vec4 var_layer_mask;
+
+uniform mediump sampler2D texture_sampler;
+
+void main()
+{
+    mediump vec4 df_sample = texture(texture_sampler, var_texcoord0);
+
+    mediump float distance        = df_sample.x;
+    mediump float distance_shadow = df_sample.z;
+
+    lowp float sdf_edge      = var_sdf_params.x;
+    lowp float sdf_outline   = var_sdf_params.y;
+    lowp float sdf_smoothing = var_sdf_params.z;
+    lowp float sdf_shadow    = var_sdf_params.w;
+
+    
+    lowp float sdf_shadow_as_outline = floor(sdf_shadow);
+    
+    lowp float sdf_is_single_layer   = var_layer_mask.a;
+
+    lowp float face_alpha      = smoothstep(sdf_edge - sdf_smoothing, sdf_edge + sdf_smoothing, distance);
+    lowp float outline_alpha   = smoothstep(sdf_outline - sdf_smoothing, sdf_outline + sdf_smoothing, distance);
+    lowp float shadow_alpha    = smoothstep(sdf_shadow - sdf_smoothing, sdf_edge + sdf_smoothing, distance_shadow);
+
+    shadow_alpha = mix(shadow_alpha,outline_alpha,sdf_shadow_as_outline);
+
+    _DMENGINE_GENERATED_gl_FragColor_0 = face_alpha * var_face_color * var_layer_mask.x +
+        outline_alpha * var_outline_color * var_layer_mask.y * (1.0 - face_alpha * sdf_is_single_layer) +
+        shadow_alpha * var_shadow_color * var_layer_mask.z * (1.0 - min(1.0,outline_alpha + face_alpha) * sdf_is_single_layer);
+}
+
+Ω∏#version 300 es
+precision mediump float;
+
+out vec4 _DMENGINE_GENERATED_gl_FragColor_0;
+in lowp vec2 var_texcoord0;
+in lowp vec4 var_face_color;
+in lowp vec4 var_outline_color;
+in lowp vec4 var_shadow_color;
+in lowp vec4 var_sdf_params;
+in lowp vec4 var_layer_mask;
+
+uniform mediump sampler2D texture_sampler;
+
+void main()
+{
+    mediump vec4 df_sample = texture(texture_sampler, var_texcoord0);
+
+    mediump float distance        = df_sample.x;
+    mediump float distance_shadow = df_sample.z;
+
+    lowp float sdf_edge      = var_sdf_params.x;
+    lowp float sdf_outline   = var_sdf_params.y;
+    lowp float sdf_smoothing = var_sdf_params.z;
+    lowp float sdf_shadow    = var_sdf_params.w;
+
+    
+    lowp float sdf_shadow_as_outline = floor(sdf_shadow);
+    
+    lowp float sdf_is_single_layer   = var_layer_mask.a;
+
+    lowp float face_alpha      = smoothstep(sdf_edge - sdf_smoothing, sdf_edge + sdf_smoothing, distance);
+    lowp float outline_alpha   = smoothstep(sdf_outline - sdf_smoothing, sdf_outline + sdf_smoothing, distance);
+    lowp float shadow_alpha    = smoothstep(sdf_shadow - sdf_smoothing, sdf_edge + sdf_smoothing, distance_shadow);
+
+    shadow_alpha = mix(shadow_alpha,outline_alpha,sdf_shadow_as_outline);
+
+    _DMENGINE_GENERATED_gl_FragColor_0 = face_alpha * var_face_color * var_layer_mask.x +
+        outline_alpha * var_outline_color * var_layer_mask.y * (1.0 - face_alpha * sdf_is_single_layer) +
+        shadow_alpha * var_shadow_color * var_layer_mask.z * (1.0 - min(1.0,outline_alpha + face_alpha) * sdf_is_single_layer);
+}
+
+âÑprecision mediump float;
+varying lowp vec2 var_texcoord0;
+varying lowp vec4 var_face_color;
+varying lowp vec4 var_outline_color;
+varying lowp vec4 var_shadow_color;
+varying lowp vec4 var_sdf_params;
+varying lowp vec4 var_layer_mask;
+
+uniform mediump sampler2D texture_sampler;
+
+void main()
+{
+    mediump vec4 df_sample = texture2D(texture_sampler, var_texcoord0);
+
+    mediump float distance        = df_sample.x;
+    mediump float distance_shadow = df_sample.z;
+
+    lowp float sdf_edge      = var_sdf_params.x;
+    lowp float sdf_outline   = var_sdf_params.y;
+    lowp float sdf_smoothing = var_sdf_params.z;
+    lowp float sdf_shadow    = var_sdf_params.w;
+
+    // If there is no blur, the shadow should behave in the same way as the outline.
+    lowp float sdf_shadow_as_outline = floor(sdf_shadow);
+    // If this is a single layer font, we must make sure to not mix alpha between layers.
+    lowp float sdf_is_single_layer   = var_layer_mask.a;
+
+    lowp float face_alpha      = smoothstep(sdf_edge - sdf_smoothing, sdf_edge + sdf_smoothing, distance);
+    lowp float outline_alpha   = smoothstep(sdf_outline - sdf_smoothing, sdf_outline + sdf_smoothing, distance);
+    lowp float shadow_alpha    = smoothstep(sdf_shadow - sdf_smoothing, sdf_edge + sdf_smoothing, distance_shadow);
+
+    shadow_alpha = mix(shadow_alpha,outline_alpha,sdf_shadow_as_outline);
+
+    gl_FragColor = face_alpha * var_face_color * var_layer_mask.x +
+        outline_alpha * var_outline_color * var_layer_mask.y * (1.0 - face_alpha * sdf_is_single_layer) +
+        shadow_alpha * var_shadow_color * var_layer_mask.z * (1.0 - min(1.0,outline_alpha + face_alpha) * sdf_is_single_layer);
+}
+
+°ú#version 430
+
+out vec4 _DMENGINE_GENERATED_gl_FragColor_0;
+in lowp vec2 var_texcoord0;
+in lowp vec4 var_face_color;
+in lowp vec4 var_outline_color;
+in lowp vec4 var_shadow_color;
+in lowp vec4 var_sdf_params;
+in lowp vec4 var_layer_mask;
+
+uniform mediump sampler2D texture_sampler;
+
+void main()
+{
+    mediump vec4 df_sample = texture(texture_sampler, var_texcoord0);
+
+    mediump float distance        = df_sample.x;
+    mediump float distance_shadow = df_sample.z;
+
+    lowp float sdf_edge      = var_sdf_params.x;
+    lowp float sdf_outline   = var_sdf_params.y;
+    lowp float sdf_smoothing = var_sdf_params.z;
+    lowp float sdf_shadow    = var_sdf_params.w;
+
+    
+    lowp float sdf_shadow_as_outline = floor(sdf_shadow);
+    
+    lowp float sdf_is_single_layer   = var_layer_mask.a;
+
+    lowp float face_alpha      = smoothstep(sdf_edge - sdf_smoothing, sdf_edge + sdf_smoothing, distance);
+    lowp float outline_alpha   = smoothstep(sdf_outline - sdf_smoothing, sdf_outline + sdf_smoothing, distance);
+    lowp float shadow_alpha    = smoothstep(sdf_shadow - sdf_smoothing, sdf_edge + sdf_smoothing, distance_shadow);
+
+    shadow_alpha = mix(shadow_alpha,outline_alpha,sdf_shadow_as_outline);
+
+    _DMENGINE_GENERATED_gl_FragColor_0 = face_alpha * var_face_color * var_layer_mask.x +
+        outline_alpha * var_outline_color * var_layer_mask.y * (1.0 - face_alpha * sdf_is_single_layer) +
+        shadow_alpha * var_shadow_color * var_layer_mask.z * (1.0 - min(1.0,outline_alpha + face_alpha) * sdf_is_single_layer);
+}
+
+ïê#     |                 GLSL.std.450                     main           3   V   X   _   m                å        main         texture_sampler      var_texcoord0         var_sdf_params    3   var_layer_mask    V   _DMENGINE_GENERATED_gl_FragColor_0    X   var_face_color    _   var_outline_color     m   var_shadow_color    G         G     !       G     "      G         G         G            G         G         G         G         G          G            G  #       G  '       G  *       G  .       G  1       G  3       G  3         G  5       G  9       G  <       G  >       G  B       G  E       G  G       G  K       G  P       G  T       G  V          G  X       G  X         G  Y       G  Z       G  \       G  ]       G  _       G  _         G  `       G  a       G  c       G  d       G  h       G  i       G  j       G  k       G  m       G  m         G  n       G  o       G  q       G  r       G  u       G  v       G  x       G  y       G  z       G  {            !                             	 
+                                 
+                ;                                   ;                        +            +                       ;               !         +     %      +     ,      ;     3         U         ;  U   V      ;     X      ;     _      +     e     Ä?;     m      6               ¯     =           =           W              Q               Q              A  !   "          =     #   "   A  !   &       %   =     '   &   A  !   )          =     *   )   A  !   -       ,   =     .   -        1         .   A  !   4   3   ,   =     5   4   É     9   #   *   Å     <   #   *        >      1   9   <      É     B   '   *   Å     E   '   *        G      1   B   E      É     K   .   *        P      1   K   <           T      .   P   G   1   =     Y   X   é     Z   Y   >   A  !   [   3      =     \   [   é     ]   Z   \   =     `   _   é     a   `   G   A  !   b   3   %   =     c   b   é     d   a   c   Ö     h   >   5   É     i   e   h   é     j   d   i   Å     k   ]   j   =     n   m   é     o   n   T   A  !   p   3      =     q   p   é     r   o   q   Å     u   G   >        v      %   e   u   Ö     x   v   5   É     y   e   x   é     z   r   y   Å     {   k   z   >  V   {   ˝  8  ‹'
+texture_samplerûÎû¶≈‡∑Ì
+  ( 0 "%
+var_texcoord0Ò—Ò¢÷¿ò„   ( 0 "'
+var_face_color‡ª´∫ô´ıÇ   (0 ")
+var_outline_color“ˇãœ≤ÿÂ®X   (0 "(
+var_shadow_color÷ﬁ„˛·˝∫∞F   (0 "'
+var_sdf_params Á˝ÒûØ¢∆·   (0 "'
+var_layer_mask˙⁄§∏ º⁄‡    (0 *:
+"_DMENGINE_GENERATED_gl_FragColor_0∞≠˘¯˛ÚÔÅr   ( 0 

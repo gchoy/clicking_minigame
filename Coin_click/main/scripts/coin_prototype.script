@@ -1,0 +1,13 @@
+go.property("speed", 4)
+
+local rotate
+
+function init(self)
+	rotate(self)
+end
+
+-- local function
+rotate = function(self)
+	go.animate(".", "rotation", go.PLAYBACK_LOOP_FORWARD, vmath.quat_rotation_z(-1.57),  go.EASING_LINEAR, self.speed)
+end
+
