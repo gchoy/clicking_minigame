@@ -1,0 +1,71 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	msg.post("#collisionobject", "disable")
+
+	self.collision_id = nil     -- id of gameobject which the cursor collided with
+
+	self.pressed = false
+	
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end
+
+function update(self, dt)
+	msg.post("@render:", "clear_color",
+	{ color = vmath.vector4(95 /256, 129 / 256, 161 / 256, 1 ) })
+
+	local pos = go.get_position()
+	label.set_text("#cursor_label", "---- x: " .. pos.x .. "  y: " .. pos.y)
+	self.collision_id = nil
+	
+end
+
+
+function on_message(self, message_id, message, sender)
+	-- Upon a collision message; set self.collision_id to the id of top-most sprite
+	-- pointed to by the cursor object
+	if message_id == hash("collision_response") then
+		if not self.collision_id or
+		go.get_position(self.collision_id).z < message.other_position.z then
+			self.collision_id = message.other_id
+		end
+	end	
+end
+
+function on_input(self, action_id, action)
+	if not action_id or action_id == hash("touch") then
+
+		-- Update the Defold cursor position to the current position of the machine cursor
+		local action_pos = vmath.vector3(action.x, action.y, 0)
+		go.set_position(action_pos)
+
+		-- Revise instance status variables; click/touch -- released
+		if action.pressed then
+			msg.post("#collisionobject", "enable")
+			self.pressed = true
+		elseif action.released then
+			msg.post("#collisionobject", "disable")
+			self.pressed = false
+			
+			-- Reset Scale to 1.0 on Selected GameObject when released
+			local s1 = vmath.vector3(1.0, 1.0, 1.0)
+			go.set_scale(s1, self.collision_id)
+			go.delete(self.collision_id)
+		end
+
+		-- Upon a Click/Touch -- if the cursor has collided with another GameObject 
+
+		if self.pressed and self.collision_id then
+			
+			-- Increase Scale for selected GameObject when selected
+			local s2 = vmath.vector3(1.2, 1.2, 1.0)
+			go.set_scale(s2, self.collision_id)
+		end
+
+				
+	end
+end
+
