@@ -1,10 +1,10 @@
 function init(self)
 	msg.post(".", "acquire_input_focus")
-
 	msg.post("#collisionobject", "disable")
 
-	self.collision_id = nil     -- id of gameobject which the cursor collided with
+	self.coin_count = 0
 
+	self.collision_id = nil     -- id of gameobject which the cursor collided with
 	self.pressed = false
 	
 end
@@ -36,6 +36,7 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
+
 	if not action_id or action_id == hash("touch") then
 
 		-- Update the Defold cursor position to the current position of the machine cursor
@@ -53,7 +54,11 @@ function on_input(self, action_id, action)
 			-- Reset Scale to 1.0 on Selected GameObject when released
 			local s1 = vmath.vector3(1.0, 1.0, 1.0)
 			go.set_scale(s1, self.collision_id)
+
 			go.delete(self.collision_id)
+
+			self.coin_count = self.coin_count + 1
+			print(self.coin_count)
 		end
 
 		-- Upon a Click/Touch -- if the cursor has collided with another GameObject 
@@ -63,6 +68,7 @@ function on_input(self, action_id, action)
 			-- Increase Scale for selected GameObject when selected
 			local s2 = vmath.vector3(1.2, 1.2, 1.0)
 			go.set_scale(s2, self.collision_id)
+			
 		end
 
 				
