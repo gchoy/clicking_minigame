@@ -97,3 +97,11 @@ embedded_instances {
   "}\n"
   ""
 }
+embedded_instances {
+  id: "main"
+  data: "components {\n"
+  "  id: \"main\"\n"
+  "  component: \"/main/scripts/main.script\"\n"
+  "}\n"
+  ""
+}
