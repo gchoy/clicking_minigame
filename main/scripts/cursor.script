@@ -28,7 +28,7 @@ end
 function on_message(self, message_id, message, sender)
 	-- Upon a collision message; set self.collision_id to the id of top-most sprite
 	-- pointed to by the cursor object
-	if message_id == hash("collision_response") then
+	if message_id == hash("collision_response") then 
 		if not self.collision_id or
 		go.get_position(self.collision_id).z < message.other_position.z then
 			self.collision_id = message.other_id
