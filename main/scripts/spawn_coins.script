@@ -8,7 +8,8 @@ function init(self)
 	msg.post("@render:", "clear_color", { color = vmath.vector4(0.2, 0.2, 0.2, 1.0) } )
 
 	-- Create 10 Game Objects
-	for i=1, 10 do
+	local n_game_obj = 10
+	for i=1, n_game_obj do
 		self.id = tostring(i)
 		local x1 = math.random(gameWidth)
 		local y1 = math.random(gameHeight)
