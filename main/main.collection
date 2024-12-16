@@ -103,5 +103,9 @@ embedded_instances {
   "  id: \"main\"\n"
   "  component: \"/main/scripts/main.script\"\n"
   "}\n"
+  "components {\n"
+  "  id: \"timer\"\n"
+  "  component: \"/main/timer.gui\"\n"
+  "}\n"
   ""
 }

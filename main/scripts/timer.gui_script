@@ -1,0 +1,30 @@
+-- set value of numeric time indicator (from 0 to 60s)
+local function update_numeric(p)
+	local node = gui.get_node("numeric")
+	gui.set_text(node, tostring(p) .. "s")
+end
+
+-- update radial/circle time indicator by changing the fill angle
+local function update_radial(p)
+	local node = gui.get_node("radial")
+	local angle = p * 6
+	gui.set_fill_angle(node, angle)
+end
+
+function init(self)
+	self.count = 0            -- <1>
+	local interval = 1        -- <2>
+	local repeating = true    -- <3>
+
+	local pie = gui.get_node("radial")
+	local size = gui.get_size(pie)
+	size.x = size.x + 10
+	gui.set_size(pie, size)
+	
+	timer.delay(interval, repeating, function()        -- <4>
+		self.count = self.count + 1                    -- <5>
+		local p = self.count % 60                    -- <6>
+		update_numeric(p)                            -- <7>
+		update_radial(p)                            -- <8>
+	end)
+end

@@ -1,2 +1,47 @@
+script: "/main/scripts/timer.gui_script"
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+nodes {
+  position {
+    x: 858.0
+    y: 561.0
+    z: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "default"
+  id: "numeric"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 862.0
+    y: 550.0
+  }
+  scale {
+    x: 0.282112
+    y: 0.58789
+    z: 1.391868
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    z: 0.0
+  }
+  type: TYPE_PIE
+  id: "radial"
+  inherit_alpha: true
+  innerRadius: 150.0
+  perimeterVertices: 64
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
