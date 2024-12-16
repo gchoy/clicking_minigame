@@ -12,7 +12,7 @@ local function update_radial(p)
 end
 
 function init(self)
-	self.count = 0            -- <1>
+	self.count = 360            -- <1>
 	local interval = 1        -- <2>
 	local repeating = true    -- <3>
 
@@ -22,7 +22,7 @@ function init(self)
 	gui.set_size(pie, size)
 	
 	timer.delay(interval, repeating, function()        -- <4>
-		self.count = self.count + 1                    -- <5>
+		self.count = self.count - 1                    -- <5>
 		local p = self.count % 60                    -- <6>
 		update_numeric(p)                            -- <7>
 		update_radial(p)                            -- <8>

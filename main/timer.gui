@@ -5,16 +5,15 @@ fonts {
 }
 nodes {
   position {
-    x: 858.0
-    y: 561.0
-    z: 1.0
+    x: 861.0
+    y: 549.0
+    z: -1.0
   }
   size {
     x: 200.0
     y: 100.0
   }
   type: TYPE_TEXT
-  text: "<text>"
   font: "default"
   id: "numeric"
   inherit_alpha: true
