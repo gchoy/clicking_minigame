@@ -14,6 +14,7 @@ nodes {
     y: 100.0
   }
   type: TYPE_TEXT
+  text: "60s"
   font: "default"
   id: "numeric"
   inherit_alpha: true

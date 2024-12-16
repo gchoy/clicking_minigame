@@ -6,15 +6,19 @@ end
 
 -- update radial/circle time indicator by changing the fill angle
 local function update_radial(p)
+	local color = vmath.vector3(1.0, 0.0, 0.0)
 	local node = gui.get_node("radial")
 	local angle = p * 6
+	if angle == 90 then
+		gui.set_color(node, color)
+	end
 	gui.set_fill_angle(node, angle)
 end
 
 function init(self)
-	self.count = 360            -- <1>
+	self.count = 360            -- so that the counter starts at 60s
 	local interval = 1        -- <2>
-	local repeating = true    -- <3>
+	local repeating = false    -- <3>
 
 	local pie = gui.get_node("radial")
 	local size = gui.get_size(pie)
