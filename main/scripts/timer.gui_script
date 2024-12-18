@@ -15,6 +15,18 @@ local function update_radial(p)
 	gui.set_fill_angle(node, angle)
 end
 
+function on_message(self, message_id, message, sender)
+	
+	if message_id == hash("coin_diff") then
+		if message.coin_diff and self.timer_id then
+			print("Player wins!")
+			timer.cancel(self.timer_id)
+		end 
+		
+	end 
+
+end
+
 function init(self)
 	self.count = 60            -- so that the counter starts at 60 seconds
 	local interval = 1        -- unit by which the pie is increased or in this case decreased
@@ -29,12 +41,11 @@ function init(self)
 		self.count = self.count - 1                    
 		local p = self.count % 60
 		print(self.count)
+		
 		if self.count <= 0 then
 			timer.cancel(self.timer_id)
 		end
 		update_numeric(p)                            
 		update_radial(p)                            
 	end)
-	
-	
 end
