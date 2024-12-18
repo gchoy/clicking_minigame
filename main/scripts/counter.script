@@ -1,7 +1,6 @@
 function on_message(self, message_id, message, sender)
 
 	if message_id == hash("start") then
-		print(message.count)
 		label.set_text("#counter_label", "Coins:" .. message.count )
 	end
 

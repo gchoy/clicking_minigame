@@ -77,7 +77,10 @@ function on_input(self, action_id, action)
 				print("Inside if comparing coin count with total_n")
 				self.coin_diff = true
 				msg.post("main#timer","coin_diff", {coin_diff = self.coin_diff})
-			end 
+			else
+				print("Inside else comparing coin count with total_n")
+				msg.post("main#timer","coin_diff", {coin_diff = self.coin_diff})
+			end
 
 			
 		end

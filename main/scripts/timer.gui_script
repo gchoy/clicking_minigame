@@ -18,10 +18,13 @@ end
 function on_message(self, message_id, message, sender)
 	
 	if message_id == hash("coin_diff") then
-		if message.coin_diff and self.timer_id then
-			print("Player wins!")
+		if message.coin_diff and self.timer_info then
+			print("Player Wins!")
 			timer.cancel(self.timer_id)
 		end 
+		print("coin diff from message")
+		self.coin_diff = message.coin_diff
+		print(self.coin_diff)
 		
 	end 
 
@@ -41,11 +44,17 @@ function init(self)
 		self.count = self.count - 1                    
 		local p = self.count % 60
 		print(self.count)
-		
+		print("self.coin_diff")
+		print(self.coin_diff)
 		if self.count <= 0 then
 			timer.cancel(self.timer_id)
+			if self.coin_diff == false then
+				print("Player Loses!")
+			end
 		end
+
 		update_numeric(p)                            
 		update_radial(p)                            
 	end)
+	self.timer_info = timer.get_info(self.timer_id)	
 end
