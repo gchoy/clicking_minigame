@@ -16,19 +16,25 @@ local function update_radial(p)
 end
 
 function init(self)
-	self.count = 360            -- so that the counter starts at 60 seconds
+	self.count = 60            -- so that the counter starts at 60 seconds
 	local interval = 1        -- unit by which the pie is increased or in this case decreased
-	local repeating = true    -- 
+	local repeating = true    
 
 	local pie = gui.get_node("radial")
 	local size = gui.get_size(pie)
 	size.x = size.x + 10
 	gui.set_size(pie, size)
 	
-	timer.delay(interval, repeating, function()        
+	self.timer_id = timer.delay(interval, repeating, function()        
 		self.count = self.count - 1                    
-		local p = self.count % 60                    
+		local p = self.count % 60
+		print(self.count)
+		if self.count <= 0 then
+			timer.cancel(self.timer_id)
+		end
 		update_numeric(p)                            
 		update_radial(p)                            
 	end)
+	
+	
 end
