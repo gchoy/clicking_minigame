@@ -107,5 +107,9 @@ embedded_instances {
   "  id: \"timer\"\n"
   "  component: \"/main/timer.gui\"\n"
   "}\n"
+  "components {\n"
+  "  id: \"end_message\"\n"
+  "  component: \"/main/end_message.gui\"\n"
+  "}\n"
   ""
 }

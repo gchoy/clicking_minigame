@@ -20,11 +20,12 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("coin_diff") then
 		if message.coin_diff and self.timer_info then
 			print("Player Wins!")
+			msg.post("main#end_message","win",{result = "You Won!"})
 			timer.cancel(self.timer_id)
-		end 
-		print("coin diff from message")
+		end
+		
 		self.coin_diff = message.coin_diff
-		print(self.coin_diff)
+		
 		
 	end 
 
@@ -44,11 +45,11 @@ function init(self)
 		self.count = self.count - 1                    
 		local p = self.count % 60
 		print(self.count)
-		print("self.coin_diff")
-		print(self.coin_diff)
+		
 		if self.count <= 0 then
 			timer.cancel(self.timer_id)
 			if self.coin_diff == false then
+				msg.post("main#end_message","lose", {result = "You Lost!"})
 				print("Player Loses!")
 			end
 		end

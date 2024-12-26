@@ -1,0 +1,10 @@
+function on_message(self, message_id, message, sender)
+	if message_id == hash("win") then
+		local node = gui.get_node("text")
+		gui.set_text(node, message.result)
+	elseif message_id == hash("lose") then
+		local node = gui.get_node("text")
+		gui.set_text(node,message.result)
+	end	
+end
+
