@@ -2,13 +2,15 @@ function init(self)
 	-- Capture the game world dimensions
 	local gameWidth = tonumber(sys.get_config("display.width"))
 	local gameHeight = tonumber(sys.get_config("display.height"))
+	print(gameWidth)
 	print("gameWidth: " .. tostring(gameWidth) .. "  gameHeight: " .. tostring(gameHeight))
 
 	-- Change background color
 	msg.post("@render:", "clear_color", { color = vmath.vector4(0.2, 0.2, 0.2, 1.0) } )
 
 	-- Create 10 Game Objects
-	local n_game = 10
+	math.randomseed(os.time()) 
+	local n_game = math.random(10,90)
 	for i=1, n_game do
 		self.id = tostring(i)
 		local x1 = math.random(gameWidth)
