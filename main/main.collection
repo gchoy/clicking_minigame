@@ -56,6 +56,12 @@ embedded_instances {
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"coin_sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/audio/Coins_Single_01_mod.wav\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
   position {
     x: 6.0
