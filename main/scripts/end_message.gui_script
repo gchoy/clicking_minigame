@@ -2,9 +2,11 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("win") then
 		local node = gui.get_node("text")
 		gui.set_text(node, message.result)
+		sound.play("main#win_sound", { delay = 0, gain = 1, pan = -1, speed = 0.5 } )
 	elseif message_id == hash("lose") then
 		local node = gui.get_node("text")
 		gui.set_text(node,message.result)
+		sound.play("main#lose_sound", { delay = 0, gain = 1, pan = -1, speed = 0.5 } )
 	end	
 end
 

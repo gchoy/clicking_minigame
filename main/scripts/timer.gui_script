@@ -2,6 +2,7 @@
 local function update_numeric(p)
 	local node = gui.get_node("numeric")
 	gui.set_text(node, tostring(p) .. "s")
+	sound.play("main#clock_tick", { delay = 0, gain = 1, pan = -1.0 } )
 end
 
 -- update radial/circle time indicator by changing the fill angle
@@ -23,10 +24,7 @@ function on_message(self, message_id, message, sender)
 			msg.post("main#end_message","win",{result = "You Won!"})
 			timer.cancel(self.timer_id)
 		end
-		
 		self.coin_diff = message.coin_diff
-		
-		
 	end 
 
 end
@@ -44,8 +42,6 @@ function init(self)
 	self.timer_id = timer.delay(interval, repeating, function()        
 		self.count = self.count - 1                    
 		local p = self.count % 60
-		print(self.count)
-		
 		if self.count <= 0 then
 			timer.cancel(self.timer_id)
 			if self.coin_diff == false then
