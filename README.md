@@ -138,18 +138,6 @@ Possible enhancements include:
 - Sound and music controls
 - Pause and restart functionality
 
----
-
-## Screenshot
-
-> Add a gameplay screenshot or GIF here.
-
-```
-![Gameplay](java_MhYKIOCHMm.gif)
-```
-
----
-
 ## License
 
 This project is intended for educational and portfolio purposes.
