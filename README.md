@@ -145,7 +145,7 @@ Possible enhancements include:
 > Add a gameplay screenshot or GIF here.
 
 ```
-![Gameplay](images/gameplay.gif)
+![Gameplay](java_MhYKIOCHMm.gif)
 ```
 
 ---
