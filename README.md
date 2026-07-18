@@ -120,7 +120,7 @@ https://opengameart.org/users/remaxim
 
 ## Built With
 
-- Defold Engine
+- Defold Engine 1.9.6
 - Lua
 
 ---
